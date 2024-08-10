@@ -1,5 +1,5 @@
 ARG version
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG version
 
 WORKDIR /install
@@ -18,7 +18,7 @@ RUN dotnet restore please-scan-api/please-scan-api.csproj
 RUN dotnet publish please-scan-api/please-scan-api.csproj -c release -o /app --no-restore -p:PackageVersion=${version}
 
 ##### final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
 RUN apt-get -y update \
     && apt-get -y install --no-install-recommends curl \
