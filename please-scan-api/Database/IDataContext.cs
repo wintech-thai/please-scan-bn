@@ -11,5 +11,6 @@ namespace Its.PleaseScan.Api.Database
         public DbSet<MRole>? Roles { get; set; }
         public DbSet<MUser>? Users { get; set; }
         public DbSet<MOrganizationUser>? OrganizationUsers { get; set; }
+        public DbSet<MWorkFlow>? Workflows { get; set; }
     }
 }

@@ -181,7 +181,7 @@ public class DataSeeder
 
     private void SeedWorkflowTemplat1()
     {
-        AddWorkflowTemplate("GenuineCheck001", "1", "", "GenuineCheck", "[]");
+        AddWorkflowTemplate("GenuineCheck001", "1", "Workflow for genuine product check", "GenuineCheck", "[]");
         context.SaveChanges();
     }
 
