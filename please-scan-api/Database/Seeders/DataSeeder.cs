@@ -158,6 +158,33 @@ public class DataSeeder
         context.SaveChanges();
     }
 
+    private void AddWorkflowTemplate(string name, string version, string desc, string type, string variables)
+    {
+        var query = context.WorkflowTemplates!.Where(x => x.TemplateName!.Equals(name)).FirstOrDefault();
+        if (query != null)
+        {
+            //Already exist
+            return;
+        }
+
+        var r = new MWorkflowTemplate() 
+        {
+            TemplateName = name,
+            TemplateDesc = desc,
+            FlowType = type,
+            Variables = variables,
+            TemplateVersion = version
+        };
+
+        context!.WorkflowTemplates!.Add(r);
+    }
+
+    private void SeedWorkflowTemplat1()
+    {
+        AddWorkflowTemplate("GenuineCheck001", "1", "", "GenuineCheck", "[]");
+        context.SaveChanges();
+    }
+
     public void Seed()
     {
         SeedDefaultOrganization();
@@ -167,5 +194,6 @@ public class DataSeeder
         SeedDefaultRoles();
         UpdateApiKeyRole();
         SeedDefaultRoles2();
+        SeedWorkflowTemplat1();
     }
 }

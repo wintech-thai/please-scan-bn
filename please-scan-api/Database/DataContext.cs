@@ -19,6 +19,7 @@ public class DataContext : DbContext, IDataContext
     public DbSet<MRole>? Roles { get; set; }
     public DbSet<MUser>? Users { get; set; }
     public DbSet<MOrganizationUser>? OrganizationUsers { get; set; }
+    public DbSet<MWorkflowTemplate>? WorkflowTemplates { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,5 +28,6 @@ public class DataContext : DbContext, IDataContext
         modelBuilder.Entity<MRole>();
         modelBuilder.Entity<MUser>();
         modelBuilder.Entity<MOrganizationUser>();
+        modelBuilder.Entity<MWorkflowTemplate>();
     }
 }
