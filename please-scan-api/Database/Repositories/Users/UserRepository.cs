@@ -1,8 +1,6 @@
-using Its.PleaseScan.Api.Database;
-using Its.PleaseScan.Api.Database.Repositories;
 using Its.PleaseScan.Api.Models;
 
-namespace Its.PleaseScan.Api.Repositories
+namespace Its.PleaseScan.Api.Database.Repositories
 {
     public class UserRepository : BaseRepository, IUserRepository
     {

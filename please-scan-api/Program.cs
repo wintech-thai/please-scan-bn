@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Authentication;
 using System.Diagnostics.CodeAnalysis;
 using Its.PleaseScan.Api.Database.Seeders;
 using Its.PleaseScan.Api.Database;
+using Its.PleaseScan.Api.Services;
+using Its.PleaseScan.Api.Database.Repositories;
+using Its.PleaseScan.Api.Authorizations;
+using Its.PleaseScan.Api.Authentications;
 
 namespace Its.PleaseScan.Api
 {
@@ -32,7 +36,21 @@ namespace Its.PleaseScan.Api
             builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connStr));
             builder.Services.AddTransient<DataSeeder>();
 
-/*
+            builder.Services.AddScoped<IDataContext, DataContext>();
+            builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
+            builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+
+            builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+            builder.Services.AddScoped<IApiKeyRepository, ApiKeyRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+            builder.Services.AddTransient<IAuthorizationHandler, GenericRbacHandler>();
+            builder.Services.AddScoped<IBasicAuthenticationRepo, BasicAuthenticationRepo>();
+            builder.Services.AddScoped<IBearerAuthenticationRepo, BearerAuthenticationRepo>();
+
             builder.Services.AddAuthentication("BasicOrBearer")
                 .AddScheme<AuthenticationSchemeOptions, AuthenticationHandlerProxy>("BasicOrBearer", null);
 
@@ -42,9 +60,8 @@ namespace Its.PleaseScan.Api
                 options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
 
                 options.AddPolicy("GenericRolePolicy", policy => policy.AddRequirements(new GenericRbacRequirement()));
-
             });
-*/
+
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())
